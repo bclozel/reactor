@@ -94,6 +94,9 @@ def customizePom(pom, gradleProject) {
 	  if (generatedPom.dependencies.size > 0) {
 		asNode().appendNode('dependencyManagement', asNode().dependencies)
 		asNode().dependencies.replaceNode {}
+		asNode().dependencyManagement.first().dependencies.first().each {
+			it.remove(it.scope.first())
+		}
 	  }
 	}
 
@@ -152,7 +155,7 @@ def customizePom(pom, gradleProject) {
 		  name = 'Sergei Egorov'
 		  email = 'segorov at pivotal.io'
 		}
-		
+
 		developer {
 		  id = 'akarnokd'
 		  name = 'David Karnok'
